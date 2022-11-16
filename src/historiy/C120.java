@@ -1,7 +1,6 @@
 package historiy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -19,7 +18,6 @@ import java.util.Scanner;
 public class C120 {
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
 		Scanner sc = new Scanner(System.in);
 		int charCount = sc.nextInt();
 		String r = sc.nextLine();//改行をスキャン
@@ -30,39 +28,33 @@ public class C120 {
 
 		char[] splitModel = model.toCharArray();
 		char[] splitTarget = target.toCharArray();
-		List<Integer> modelParttern = parttern(splitModel, charCount);
-		List<Integer> targetPartten = parttern(splitTarget, charCount);
+		boolean result = false;
 
-		System.out.println(modelParttern == targetPartten);
-		
-		int count = 0;
-		for(int i = 0 ; i < splitModel.length; i ++) {
-			for(int j = 0 ; j < splitTarget.length; j++) {
-				if(Character.compare(splitModel[i], splitTarget[j]) == 0) {
-					i++;
-				}
+		char[] temp = splitModel;
+		for (int i = 0; i < splitModel.length; i++) {
+			temp = sort(temp, charCount);
+			if (Arrays.equals(temp, splitTarget)) {
+				result = true;
+				break;
 			}
 		}
-		for(char c : splitModel) {
-		
+		if (result) {
+			System.out.println("YES");
+		} else {
+			System.out.println("NO");
 		}
 	}
 
-	static List<Integer> parttern(char[] c, int charCount) {
-		List<Integer> parttern = new ArrayList<>();
-		for (int i = 0; i < c.length; i++) {
-			int count = 0;
-			//要素が最大値か否か。最大値の場合、最初の要素と比較する。以外は、次の要素と比較。
-			if (i == charCount - 1) {
-				if (Character.compare(c[i], c[0]) == 0) {
-					count++;
-				} else if (Character.compare(c[i], c[i + 1]) == 0) {
-					count ++;
-				} else {
-					parttern.add(count);
-				}
+	static char[] sort(char[] charArray, int count) {
+		char[] temp = new char[count];
+		for (int i = 0, j = 1; i < charArray.length; i++, j++) {
+			//			char c = splitModel[i];
+			if (j < charArray.length) {
+				temp[i] = charArray[j];
+			} else {
+				temp[i] = charArray[0];
 			}
 		}
-		return parttern;
+		return temp;
 	}
 }
