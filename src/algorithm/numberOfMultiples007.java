@@ -10,7 +10,7 @@ public class numberOfMultiples007 {
 		
 		String[] numXY = line.split(" ", 0);
 		int count = 0;
-		for(int i = 0; i < Integer.parseInt(numXY[0]); i++) {
+		for(int i = 1; i <= Integer.parseInt(numXY[0]); i++) {
 			if(i % Integer.parseInt(numXY[1]) == 0 || i % Integer.parseInt(numXY[2]) == 0) {
 				count++;
 				}
